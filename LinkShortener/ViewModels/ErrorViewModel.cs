@@ -1,4 +1,4 @@
-namespace LinkShortener.Models
+namespace LinkShortener.ViewModels
 {
     public class ErrorViewModel
     {

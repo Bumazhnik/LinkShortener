@@ -1,7 +1,14 @@
+using LinkShortener.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlite("Data Source=.\\Database\\applicationcontextdb.db"));
+builder.Services.AddSingleton<IPasswordHasher<User>>(new PasswordHasher<User>());
 builder.WebHost.ConfigureKestrel(options =>
 {
     options.ListenAnyIP(443, listenOptions =>

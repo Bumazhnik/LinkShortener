@@ -1,4 +1,5 @@
 ﻿using LinkShortener.Models;
+using LinkShortener.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,13 +7,25 @@ namespace LinkShortener.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private ApplicationContext db;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ApplicationContext context)
         {
-            _logger = logger;
+            db = context;
         }
-
+        [HttpPost]
+        public async Task<IActionResult> MakeLink([FromBody] string link)
+        {
+            Console.WriteLine(link);
+            if (!link.StartsWith("http://") && !link.StartsWith("https://"))
+                return BadRequest();
+            Link lnk = new Link() { Address = link };
+            await db.Links.AddAsync(lnk);
+            await db.SaveChangesAsync();
+           
+            string domainName = HttpContext.Request.Host.ToString();
+            return Json("https://" + domainName + "/p/" + IdConverter.Encode(lnk.Id));
+        }
         public IActionResult Index()
         {
             return View();

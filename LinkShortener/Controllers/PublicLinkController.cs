@@ -1,23 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LinkShortener.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace LinkShortener.Controllers
 {
     public class PublicLinkController : Controller
     {
-        Dictionary<string, string> urls = new()
+        private ApplicationContext db;
+        public PublicLinkController(ApplicationContext context)
         {
-            {"g" ,"https://google.com" },
-            {"y", "https://youtube.com" }
-        };
+            db = context;
+        }
         [HttpGet]
         [Route("/p/{id}")]
-        public IActionResult Index(string id)
+        public async Task<IActionResult> Index(string id)
         {
-            if(urls.TryGetValue(id, out var url))
-            {
-                return Redirect(url);
-            }
-            return BadRequest();
+            Link? link = await db.Links.FirstOrDefaultAsync(x => x.Id == IdConverter.Decode(id));
+            if(link == null)
+                return BadRequest();
+            return Redirect(link.Address);
         }
     }
 }
