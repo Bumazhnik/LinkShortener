@@ -17,8 +17,16 @@ shortUrlButton.addEventListener("click", async () => {
             return response.text()
     })
         .then((res) => {
-            if (res)
-                convertedUrls.innerText += `Your new url is: ${res}\n`;
+            if (res) {
+                let newUrlContainer = document.createElement("div");
+                let shortUrlElem = document.createElement("a");
+                shortUrlElem.href = res;
+                shortUrlElem.innerText = res;
+                newUrlContainer.appendChild(shortUrlElem);
+                newUrlContainer.classList.add("urlContainer");
+                convertedUrls.appendChild(newUrlContainer);
+            }
+
         }).catch((error) => {
             console.log(error)
         })

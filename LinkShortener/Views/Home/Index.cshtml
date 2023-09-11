@@ -2,17 +2,20 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div>
+<div class="container">
     <h1>Enter the url</h1>
-    <input type="url" id="urlBox"/>
-    <button id="shortUrlButton">Shorten</button>
+
+    <div class="flexCenter">
+        <input type="url" id="urlBox" placeholder="https://example.com" />
+        <button id="shortUrlButton">✔</button>
+
+    </div>
     <div id="convertedUrls"></div>
 </div>
 
 @section Scripts{
-    <script src="~/webpack/index.js"/>
-    <script type="text/javascript">
-
-
-    </script>
+    <script src="~/webpack/index.js"></script>
+}
+@section Styles{
+    <link rel="stylesheet" href="~/webpack/css/index.css"/>
 }
