@@ -10,41 +10,9 @@
 </div>
 
 @section Scripts{
+    <script src="~/webpack/index.js"/>
     <script type="text/javascript">
-        urlBox = document.getElementById("urlBox");
-        shortUrlButton = document.getElementById("shortUrlButton");
-        convertedUrls = document.getElementById("convertedUrls");
-        shortUrlButton.addEventListener("click", () => {
-            let postObj = {
-                link: urlBox.value
-            }
-            let post = JSON.stringify(postObj)
-            const url = "/Home/MakeLink"
-            console.log(post);
-            fetch(url, {
-                method: 'post',
-                body: JSON.stringify(urlBox.value),
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then((response) => {
-                if (response.status == 400)
-                    convertedUrls.innerText += "Link is wrong\n";
-                else
-                    return response.json()
-            })
-            .then((res) => {
-                if(res)
-                    convertedUrls.innerText += "Your new url is: " + res + "\n";
-            }).catch((error) => {
-                console.log(error)
-            })
 
-
-
-        }); 
 
     </script>
 }

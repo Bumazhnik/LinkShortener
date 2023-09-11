@@ -14,7 +14,7 @@ namespace LinkShortener.Controllers
             db = context;
         }
         [HttpPost]
-        public async Task<IActionResult> MakeLink([FromBody] string link)
+        public async Task<ActionResult<string>> MakeLink([FromBody] string link)
         {
             Console.WriteLine(link);
             if (!link.StartsWith("http://") && !link.StartsWith("https://"))
@@ -24,7 +24,7 @@ namespace LinkShortener.Controllers
             await db.SaveChangesAsync();
            
             string domainName = HttpContext.Request.Host.ToString();
-            return Json("https://" + domainName + "/p/" + IdConverter.Encode(lnk.Id));
+            return "https://" + domainName + "/p/" + IdConverter.Encode(lnk.Id);
         }
         public IActionResult Index()
         {

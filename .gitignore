@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 Database/
+LinkShortener/wwwroot/webpack/
