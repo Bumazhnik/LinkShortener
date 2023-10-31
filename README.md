@@ -3,7 +3,11 @@ Link Shortener written in ASP.NET MVC 6 and TypeScript
 ## Prerequisites
 .Net, npm is required for this to work
 ## Build
-Clone this repository and run this command
+Clone this repository and create "Database" folder in project directory
+```shell
+mkdir LinkShortener/Database
+```
+Run this command
 ```shell
 npm install
 ```
