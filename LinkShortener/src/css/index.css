@@ -39,11 +39,13 @@ h1{
 }
 #convertedUrls{
     height:50%;
-    width:100%;
+    width:99%;
+    max-width:800px;
     display:flex;
     flex-direction:column-reverse;
     align-items:center;
     justify-content:flex-end;
+    margin:0 5px;
 }
 #shortUrlButton {
     height: 5rem;
@@ -57,16 +59,35 @@ h1{
     justify-content:center;
     align-items:center;
 }
+.convertContainer{
+    margin:0 5px;
+}
 .urlContainer {
-    width: 50%;
+    width: 100%;
     height: 100px;
     display: grid;
     grid-template-columns: 1fr 1fr 100px;
     border: 1px solid black;
     grid-gap: 1px;
     background-color: black;
+    margin-top:10px;
 }
-.urlContainer a{
-    background-color:white;
+.urlContainer div {
+    width:100%;
+    height:100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+
+    flex-shrink: 1;
+    min-width: 0;
+    padding:5px;
+}
+.urlContainer a {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
