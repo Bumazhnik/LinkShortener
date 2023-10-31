@@ -5,7 +5,7 @@ Link Shortener written in ASP.NET MVC 6 and TypeScript
 ## Build
 Clone this repository and create "Database" folder in project directory
 ```shell
-mkdir LinkShortener/Database
+mkdir LinkShortener\Database
 ```
 Run this command
 ```shell
