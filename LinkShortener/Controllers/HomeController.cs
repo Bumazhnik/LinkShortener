@@ -16,22 +16,15 @@ namespace LinkShortener.Controllers
         [HttpPost]
         public async Task<ActionResult<string>> MakeLink([FromBody] string link)
         {
-            Console.WriteLine(link);
             if (!link.StartsWith("http://") && !link.StartsWith("https://"))
                 return BadRequest();
             Link lnk = new Link() { Address = link };
             await db.Links.AddAsync(lnk);
             await db.SaveChangesAsync();
-           
             string domainName = HttpContext.Request.Host.ToString();
             return "https://" + domainName + "/p/" + IdConverter.Encode(lnk.Id);
         }
         public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
         {
             return View();
         }
